@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar/';
 import Footer from './components/Footer/';
+import Quiz from './components/Quiz/';
 
 import firebase from 'firebase/app';
 import firebaseApp from './firebase.js';
@@ -59,19 +60,23 @@ class App extends Component {
       <React.Fragment>
         <Navbar user={this.state.user || {}}
                 handleLogout={this.handleLogout}/>
+        {!this.state.isLoggedIn ? 
         <section className="hero is-medium">
-          <div class="hero-body">
+          <div className="hero-body">
             <div className="container">
               <h1 className="title">Enter the quiz</h1>
               <h2 className="subtitle">
                 A quiz app with social media login
               </h2>
               <button className="button is-link" onClick={this.handleLogin}>
-                <span class="icon"><i class="fab fa-facebook-f"></i></span><span>Login with Facebook</span>
+                <span className="icon"><i className="fab fa-facebook-f"></i></span>
+                <span>Login with Facebook</span>
               </button>
             </div>
           </div>
         </section>
+        :
+        <Quiz user={this.state.user} />}
         <Footer />
       </React.Fragment>
     );
